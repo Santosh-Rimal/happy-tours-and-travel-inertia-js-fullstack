@@ -1032,99 +1032,111 @@ export default function Home() {
                 {/* CTA Section */}
                 <section id="contact" className="bg-gray-900 py-16 text-white">
                     <div className="container mx-auto px-4">
-                        <div className="flex flex-col items-center justify-between gap-8 rounded-2xl bg-green-600 p-8 md:flex-row md:p-12">
+                        <div className="flex flex-col items-center justify-between gap-8 rounded-2xl bg-gradient-to-r from-green-600 to-green-700 p-8 shadow-2xl md:flex-row md:p-12">
                             <div className="md:w-1/2">
                                 <h2 className="mb-4 text-3xl font-bold md:text-4xl">Ready for Your Himalayan Adventure?</h2>
-                                <p className="mb-6 text-lg">
+                                <p className="mb-6 text-lg text-white/90">
                                     Contact us today to start planning your dream trek in Nepal's majestic mountains. Our team is ready to answer all
                                     your questions and help create your perfect itinerary.
                                 </p>
-                                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                                    <div className="rounded-lg bg-white/10 p-4">
-                                        <h3 className="mb-2 text-sm font-semibold tracking-wider uppercase">Email Us</h3>
+                                <div className="grid grid-cols-1 gap-5 sm:grid-cols-1">
+                                    <div className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-white/10 to-white/5 p-5 backdrop-blur-md transition-all duration-300 hover:from-white/20 hover:to-white/10 hover:shadow-lg">
+                                        <div className="absolute -top-3 -right-3 h-16 w-16 rounded-full bg-green-400 opacity-10 transition-all duration-500 group-hover:scale-150"></div>
+                                        <h3 className="relative z-10 mb-3 text-sm font-semibold tracking-wider text-green-300 uppercase">Email Us</h3>
                                         <a
                                             href="mailto:info@himalayanecologicaltrek.com"
-                                            className="flex items-center text-lg font-medium hover:underline"
+                                            className="relative z-10 flex items-center text-lg font-medium text-white transition-all hover:text-green-200"
                                         >
-                                            <svg className="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth="2"
-                                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                                                ></path>
-                                            </svg>
-                                            info@himalayanecologicaltrek.com
+                                            <div className="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-green-600/20 p-2 group-hover:bg-green-600/30">
+                                                <svg className="h-5 w-5 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth="2"
+                                                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                                    ></path>
+                                                </svg>
+                                            </div>
+                                            <span className="border-b border-transparent group-hover:border-green-300">
+                                                info@himalayanecologicaltrek.com
+                                            </span>
                                         </a>
                                     </div>
-                                    <div className="rounded-lg bg-white/10 p-4">
-                                        <h3 className="mb-2 text-sm font-semibold tracking-wider uppercase">Call Us</h3>
-                                        <a href="tel:+9771234567890" className="flex items-center text-lg font-medium hover:underline">
-                                            <svg className="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth="2"
-                                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                                                ></path>
-                                            </svg>
-                                            +977-1-2345678
+
+                                    <div className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-white/10 to-white/5 p-5 backdrop-blur-md transition-all duration-300 hover:from-white/20 hover:to-white/10 hover:shadow-lg">
+                                        <div className="absolute -top-3 -right-3 h-16 w-16 rounded-full bg-green-400 opacity-10 transition-all duration-500 group-hover:scale-150"></div>
+                                        <h3 className="relative z-10 mb-3 text-sm font-semibold tracking-wider text-green-300 uppercase">Call Us</h3>
+                                        <a
+                                            href="tel:+9771234567890"
+                                            className="relative z-10 flex items-center text-lg font-medium text-white transition-all hover:text-green-200"
+                                        >
+                                            <div className="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-green-600/20 p-2 group-hover:bg-green-600/30">
+                                                <svg className="h-5 w-5 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth="2"
+                                                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                                                    ></path>
+                                                </svg>
+                                            </div>
+                                            <span className="border-b border-transparent group-hover:border-green-300">+977-1-2345678</span>
                                         </a>
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-full rounded-lg bg-white p-6 shadow-xl md:w-1/2">
-                                <h3 className="mb-4 text-xl font-bold text-gray-800">Send Us a Message</h3>
-                                <form className="space-y-4">
-                                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                            <div className="w-full rounded-lg bg-white/10 p-6 shadow-xl backdrop-blur-sm transition-all hover:shadow-2xl md:w-2/5">
+                                <h3 className="mb-6 text-center text-2xl font-bold text-white">Send Us a Message</h3>
+                                <form className="space-y-5">
+                                    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                                         <div>
-                                            <label htmlFor="name" className="mb-1 block text-sm font-medium text-gray-700">
+                                            <label htmlFor="name" className="mb-2 block text-sm font-medium text-green-100">
                                                 Name
                                             </label>
                                             <input
                                                 type="text"
                                                 id="name"
-                                                className="w-full rounded-lg border-gray-300 px-4 py-2 focus:border-green-500 focus:ring-green-500"
+                                                className="focus:ring-opacity-50 w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/50 focus:border-green-300 focus:ring-2 focus:ring-green-200"
                                                 placeholder="Your name"
                                             />
                                         </div>
                                         <div>
-                                            <label htmlFor="email" className="mb-1 block text-sm font-medium text-gray-700">
+                                            <label htmlFor="email" className="mb-2 block text-sm font-medium text-green-100">
                                                 Email
                                             </label>
                                             <input
                                                 type="email"
                                                 id="email"
-                                                className="w-full rounded-lg border-gray-300 px-4 py-2 focus:border-green-500 focus:ring-green-500"
+                                                className="focus:ring-opacity-50 w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/50 focus:border-green-300 focus:ring-2 focus:ring-green-200"
                                                 placeholder="Your email"
                                             />
                                         </div>
                                     </div>
                                     <div>
-                                        <label htmlFor="subject" className="mb-1 block text-sm font-medium text-gray-700">
+                                        <label htmlFor="subject" className="mb-2 block text-sm font-medium text-green-100">
                                             Subject
                                         </label>
                                         <input
                                             type="text"
                                             id="subject"
-                                            className="w-full rounded-lg border-gray-300 px-4 py-2 focus:border-green-500 focus:ring-green-500"
+                                            className="focus:ring-opacity-50 w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/50 focus:border-green-300 focus:ring-2 focus:ring-green-200"
                                             placeholder="Subject"
                                         />
                                     </div>
                                     <div>
-                                        <label htmlFor="message" className="mb-1 block text-sm font-medium text-gray-700">
+                                        <label htmlFor="message" className="mb-2 block text-sm font-medium text-green-100">
                                             Message
                                         </label>
                                         <textarea
                                             id="message"
                                             rows={4}
-                                            className="w-full rounded-lg border-gray-300 px-4 py-2 focus:border-green-500 focus:ring-green-500"
+                                            className="focus:ring-opacity-50 w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/50 focus:border-green-300 focus:ring-2 focus:ring-green-200"
                                             placeholder="Your message"
                                         ></textarea>
                                     </div>
                                     <button
                                         type="submit"
-                                        className="w-full rounded-lg bg-green-600 px-6 py-3 font-bold text-white transition-colors hover:bg-green-700"
+                                        className="w-full transform rounded-lg bg-white px-6 py-3 font-bold text-green-600 shadow-lg transition-all hover:scale-[1.02] hover:bg-green-50 hover:shadow-xl active:scale-95"
                                     >
                                         Send Message
                                     </button>
