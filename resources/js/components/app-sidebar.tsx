@@ -4,50 +4,86 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem, NavGroup } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import {
+    ChartBar,
+    Image,
+    ImagePlay,
+    LayoutDashboard,
+    ListCollapseIcon,
+    MessageSquareQuoteIcon,
+    SettingsIcon,
+    SquareCheck,
+    SquareLibrary,
+    SquareStack, // or SquaresFour
+    Star,
+} from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
         href: '/dashboard',
-        icon: LayoutGrid,
+        icon: LayoutDashboard,
         isActive: true,
     },
 ];
 
 const NavGroups: NavGroup[] = [
     {
-        title: '98yo87y87y87',
+        title: 'About Trip',
         items: [
             {
-                title: 'Dashboard',
+                title: 'Trip Category',
                 href: '/dashboard',
-                icon: LayoutGrid,
+                icon: ChartBar,
                 isActive: true,
             },
             {
-                title: 'Dashboard',
-                href: '/dashboard',
-                icon: LayoutGrid,
+                title: 'Trip Detail',
+                href: '/tripdetails',
+                icon: ListCollapseIcon,
                 isActive: true,
             },
             {
-                title: 'Dashboard',
-                href: '/dashboard',
-                icon: LayoutGrid,
+                title: 'Slider Images',
+                href: '/slidersmages',
+                icon: ImagePlay,
                 isActive: true,
             },
             {
-                title: 'Dashboard',
-                href: '/dashboard',
-                icon: LayoutGrid,
+                title: 'Highlight',
+                href: '/highlights',
+                icon: Star,
+                isActive: true,
+            },
+        ],
+    },
+    {
+        title: 'Trip Details',
+        items: [
+            {
+                title: 'About Trip',
+                href: '/abouttrips',
+                icon: MessageSquareQuoteIcon,
                 isActive: true,
             },
             {
-                title: 'Dashboard',
-                href: '/dashboard',
-                icon: LayoutGrid,
+                title: 'Include',
+                href: '/includes',
+                icon: SquareCheck,
+                isActive: true,
+            },
+            // squares-intersect
+            {
+                title: 'Not Include',
+                href: '/notincludes',
+                icon: SquareStack, // or SquaresFour
+                isActive: true,
+            },
+            {
+                title: 'Useful Information',
+                href: '/usefulinformations',
+                icon: SquareLibrary,
                 isActive: true,
             },
         ],
@@ -56,14 +92,14 @@ const NavGroups: NavGroup[] = [
 
 const footerNavItems: NavItem[] = [
     {
-        title: 'Repository',
+        title: 'All Service',
         href: 'https://github.com/laravel/react-starter-kit',
-        icon: Folder,
+        icon: SettingsIcon,
     },
     {
-        title: 'Documentation',
+        title: 'Logos',
         href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
+        icon: Image,
     },
 ];
 
