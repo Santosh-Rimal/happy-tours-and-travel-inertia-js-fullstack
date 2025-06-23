@@ -2,7 +2,7 @@ import { SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, Sideba
 import { type NavGroup, type NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 
-export function NavMain({ items = [] , navGroups = [] }: { items: NavItem[]; navGroups: NavGroup[] }) {
+export function NavMain({ items = [], navGroups = [] }: { items: NavItem[]; navGroups: NavGroup[] }) {
     const page = usePage();
     return (
         <SidebarGroup className="px-2 py-0">
@@ -23,7 +23,7 @@ export function NavMain({ items = [] , navGroups = [] }: { items: NavItem[]; nav
             {/* Add rendering for nav groups */}
             {navGroups.map((group) => (
                 <SidebarGroup key={group.title}>
-                    <SidebarGroupLabel>{group.title}</SidebarGroupLabel>
+                    <SidebarGroupLabel className="-ml-4">{group.title}</SidebarGroupLabel>
                     <SidebarMenu>
                         {group.items.map((item) => (
                             <SidebarMenuItem key={item.title}>

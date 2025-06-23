@@ -1,5 +1,5 @@
 import FrontendLayout from '@/layouts/layouts/frontendlayout/layout';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { ReactElement, ReactNode } from 'react';
 
 interface TrekPackage {
@@ -688,9 +688,12 @@ export default function Home() {
                                             </div>
                                             <div className="flex items-center justify-between">
                                                 <span className="text-sm font-bold text-green-600">From ${trek.price}</span>
-                                                <a href={`/treks/${trek.id}`} className="text-xs font-medium text-gray-500 hover:text-green-600">
+                                                <Link
+                                                    href={route('treks.show', { id: trek.id })}
+                                                    className="text-xs font-medium text-gray-500 hover:text-green-600"
+                                                >
                                                     View →
-                                                </a>
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>
