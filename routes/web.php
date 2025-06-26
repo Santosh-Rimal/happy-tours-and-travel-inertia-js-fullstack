@@ -1,12 +1,15 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\frontend\ContactController;
 
 Route::get('/', function () {
     return Inertia::render('welcome');
 })->name('home');
 
+
+Route::post('contact/store',[ContactController::class,'store'])->name('contacts.store');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
