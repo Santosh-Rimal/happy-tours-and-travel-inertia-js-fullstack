@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\frontend\ContactController;
 
 Route::get('/index',function(){
     return Inertia::render('frontend/index');
@@ -24,3 +25,5 @@ return Inertia::render('frontend/galleryimage');
 Route::get('/team/{id}', function(){
 return Inertia::render('frontend/teammember');
 })->name('team.show');
+
+Route::post('contact/store',[ContactController::class,'store'])->name('contacts.store');

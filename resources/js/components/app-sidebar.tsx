@@ -6,6 +6,7 @@ import { type NavItem, NavGroup } from '@/types';
 import { Link } from '@inertiajs/react';
 import {
     ChartBar,
+    ContactRound,
     Image,
     ImagePlay,
     LayoutDashboard,
@@ -24,6 +25,12 @@ const mainNavItems: NavItem[] = [
         title: 'Dashboard',
         href: '/dashboard',
         icon: LayoutDashboard,
+        isActive: true,
+    },
+    {
+        title: 'Contact',
+        href: '/contacts',
+        icon: ContactRound,
         isActive: true,
     },
 ];

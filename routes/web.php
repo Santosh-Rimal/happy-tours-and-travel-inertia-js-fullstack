@@ -1,20 +1,22 @@
 <?php
 
+use App\Http\Controllers\backend\ContactController as BackendContactController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\frontend\ContactController;
 
 Route::get('/', function () {
     return Inertia::render('welcome');
 })->name('home');
 
 
-Route::post('contact/store',[ContactController::class,'store'])->name('contacts.store');
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
+
+    Route::name('backend.')->resource('contacts',BackendContactController::class)->except('edit','update','store','create');
 });
 
 require __DIR__.'/settings.php';

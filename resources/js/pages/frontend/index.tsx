@@ -1,6 +1,8 @@
+import InputError from '@/components/input-error';
+import { Input } from '@/components/ui/input';
 import FrontendLayout from '@/layouts/layouts/frontendlayout/layout';
-import { Head, Link } from '@inertiajs/react';
-import { ReactElement, ReactNode } from 'react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
+import { FormEvent, ReactElement, ReactNode } from 'react';
 
 interface TrekPackage {
     id: number;
@@ -36,6 +38,14 @@ interface GalleryImage {
     category: 'mountains' | 'culture' | 'wildlife' | 'people';
 }
 
+// interface Contact {
+//     name: string;
+//     email: string;
+//     phone: number;
+//     subject: string;
+//     message: string;
+// }
+
 interface TeamMember {
     id: number;
     name: string;
@@ -57,7 +67,9 @@ interface BlogPost {
 }
 
 export default function Home() {
+    const { flash } = usePage<{ flash: { success?: string; error?: string } }>().props;
     // Trek packages data
+    console.log(flash);
     const trekPackages: TrekPackage[] = [
         {
             id: 1,
@@ -339,6 +351,23 @@ export default function Home() {
 
     const featuredPackages = trekPackages.filter((pkg) => pkg.featured);
     const otherPackages = trekPackages.filter((pkg) => !pkg.featured);
+
+    const { data, setData, post, processing, errors, reset } = useForm({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: '',
+    });
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        post(route('contacts.store'), {
+            preserveScroll: true,
+            onSuccess: () => {
+                reset();
+            },
+        });
+    };
 
     return (
         <>
@@ -1088,43 +1117,73 @@ export default function Home() {
                                     </div>
                                 </div>
                             </div>
+
                             <div className="w-full rounded-lg bg-white/10 p-6 shadow-xl backdrop-blur-sm transition-all hover:shadow-2xl md:w-2/5">
+                                {flash.success && <div className="flex justify-center leading-8 text-white">{flash.success}</div>}
+                                <hr className="bg-green-500" />
                                 <h3 className="mb-6 text-center text-2xl font-bold text-white">Send Us a Message</h3>
-                                <form className="space-y-5">
+                                <form className="space-y-5" onSubmit={handleSubmit}>
                                     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                                         <div>
                                             <label htmlFor="name" className="mb-2 block text-sm font-medium text-green-100">
                                                 Name
                                             </label>
-                                            <input
+                                            <Input
                                                 type="text"
                                                 id="name"
-                                                className="focus:ring-opacity-50 w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/50 focus:border-green-300 focus:ring-2 focus:ring-green-200"
+                                                name="name"
+                                                value={data.name}
+                                                onChange={(e) => setData('name', e.target.value)}
+                                                className={`focus:ring-opacity-50 ${errors?.name ?? 'border-red-500 bg-red-400'} w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/50 focus:border-green-300 focus:ring-2 focus:ring-green-200`}
                                                 placeholder="Your name"
                                             />
+                                            {errors.name && <InputError message={errors.name} />}
                                         </div>
                                         <div>
                                             <label htmlFor="email" className="mb-2 block text-sm font-medium text-green-100">
                                                 Email
                                             </label>
-                                            <input
+                                            <Input
                                                 type="email"
                                                 id="email"
-                                                className="focus:ring-opacity-50 w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/50 focus:border-green-300 focus:ring-2 focus:ring-green-200"
+                                                name="email"
+                                                value={data.email}
+                                                onChange={(e) => setData('email', e.target.value)}
+                                                className="focus:ring-opacity-50 ${errors.email ?? 'border-red-500 bg-red-400'} w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/50 focus:border-green-300 focus:ring-2 focus:ring-green-200"
                                                 placeholder="Your email"
                                             />
+                                            {errors.email && <InputError message={errors.email} />}
                                         </div>
+                                    </div>
+                                    <div>
+                                        <label htmlFor="phone" className="mb-2 block text-sm font-medium text-green-100">
+                                            Phone
+                                        </label>
+                                        <Input
+                                            name="phone"
+                                            type="text"
+                                            id="subject"
+                                            value={data.phone}
+                                            onChange={(e) => setData('phone', e.target.value)}
+                                            className="focus:ring-opacity-50 ${errors.phone ?? 'border-red-500 bg-red-400'} w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/50 focus:border-green-300 focus:ring-2 focus:ring-green-200"
+                                            placeholder="Phone"
+                                        />
+                                        {errors.phone && <InputError message={errors.phone} />}
                                     </div>
                                     <div>
                                         <label htmlFor="subject" className="mb-2 block text-sm font-medium text-green-100">
                                             Subject
                                         </label>
-                                        <input
+                                        <Input
                                             type="text"
                                             id="subject"
-                                            className="focus:ring-opacity-50 w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/50 focus:border-green-300 focus:ring-2 focus:ring-green-200"
+                                            name="subject"
+                                            value={data.subject}
+                                            onChange={(e) => setData('subject', e.target.value)}
+                                            className="focus:ring-opacity-50 ${errors.subject ?? 'border-red-500 bg-red-400'} w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/50 focus:border-green-300 focus:ring-2 focus:ring-green-200"
                                             placeholder="Subject"
                                         />
+                                        {errors.subject && <InputError message={errors.subject} />}
                                     </div>
                                     <div>
                                         <label htmlFor="message" className="mb-2 block text-sm font-medium text-green-100">
@@ -1133,15 +1192,20 @@ export default function Home() {
                                         <textarea
                                             id="message"
                                             rows={4}
-                                            className="focus:ring-opacity-50 w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/50 focus:border-green-300 focus:ring-2 focus:ring-green-200"
+                                            name="message"
+                                            value={data.message}
+                                            onChange={(e) => setData('message', e.target.value)}
+                                            className="focus:ring-opacity-50 `${errors.message ? 'border-red-500 bg-red-400'}` w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/50 focus:border-green-300 focus:ring-2 focus:ring-green-200"
                                             placeholder="Your message"
                                         ></textarea>
                                     </div>
+                                    {errors.message && <InputError message={errors.message} />}
                                     <button
                                         type="submit"
-                                        className="w-full transform rounded-lg bg-white px-6 py-3 font-bold text-green-600 shadow-lg transition-all hover:scale-[1.02] hover:bg-green-50 hover:shadow-xl active:scale-95"
+                                        disabled={processing}
+                                        className="w-full transform cursor-pointer rounded-lg bg-white px-6 py-3 font-bold text-green-600 shadow-lg transition-all hover:scale-[1.02] hover:bg-green-50 hover:bg-green-600 hover:text-white hover:shadow-xl active:scale-95"
                                     >
-                                        Send Message
+                                        {processing ? 'Sending...' : 'Send Message'}
                                     </button>
                                 </form>
                             </div>
