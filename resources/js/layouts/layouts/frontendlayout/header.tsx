@@ -8,7 +8,7 @@ const Header = () => {
     };
     return (
         <>
-            <nav className="sticky top-0 z-50 bg-white px-4 py-3 shadow-md transition-all duration-300 sm:px-6">
+            <nav className="sticky top-0 z-50 bg-green-600 px-4 py-3 text-white shadow-md transition-all duration-300 sm:px-6">
                 <div className="mx-auto flex max-w-7xl items-center justify-between">
                     {/* Logo/Company Name */}
                     <Link href="/" className="group flex items-center">

@@ -1,8 +1,9 @@
 import InputError from '@/components/input-error';
 import { Input } from '@/components/ui/input';
-import FrontendLayout from '@/layouts/layouts/frontendlayout/layout';
+import Layout from '@/layouts/layouts/frontendlayout/layout';
+// import FrontendLayout from '@/layouts/layouts/frontendlayout/layout';
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
-import { FormEvent, ReactElement, ReactNode } from 'react';
+import { FormEvent, ReactNode } from 'react';
 
 interface TrekPackage {
     id: number;
@@ -1217,4 +1218,4 @@ export default function Home() {
     );
 }
 
-Home.frontendlayout = (page: ReactNode): ReactElement => <FrontendLayout page={page} />;
+Home.layout = (page: ReactNode) => <Layout>{page}</Layout>;
