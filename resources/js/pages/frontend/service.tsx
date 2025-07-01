@@ -1,0 +1,654 @@
+import Layout from '@/layouts/layouts/frontendlayout/layout';
+import { Head } from '@inertiajs/react';
+import { ReactElement, ReactNode } from 'react';
+
+interface Service {
+    id: number;
+    title: string;
+    slug: string;
+    duration: string;
+    difficulty: 'Easy' | 'Moderate' | 'Challenging' | 'Strenuous';
+    maxAltitude: string;
+    bestSeason: string[];
+    priceRange: string;
+    image: string;
+    overview: string;
+    highlights: string[];
+    itinerary: {
+        day: number;
+        title: string;
+        description: string;
+    }[];
+    includes: string[];
+    excludes: string[];
+}
+
+const services: Service[] = [
+    {
+        id: 1,
+        title: 'Everest Base Camp Trek',
+        slug: 'everest-base-camp-trek',
+        duration: '14 Days',
+        difficulty: 'Challenging',
+        maxAltitude: '5,545m (Kala Patthar)',
+        bestSeason: ['March-May', 'September-November'],
+        priceRange: '$1,200 - $1,800',
+        image: 'https://images.unsplash.com/photo-1580807465154-7c5a4749f536',
+        overview:
+            "The iconic trek to the foot of the world's highest mountain, passing through Sherpa villages, Buddhist monasteries, and breathtaking Himalayan landscapes.",
+        highlights: [
+            'Spectacular views of Everest, Lhotse, and Ama Dablam',
+            'Visit Tengboche Monastery',
+            'Explore Namche Bazaar (Sherpa capital)',
+            'Kala Patthar sunrise viewpoint',
+            'Experience Sherpa culture',
+        ],
+        itinerary: [
+            { day: 1, title: 'Arrival in Kathmandu', description: 'Welcome and trip briefing' },
+            { day: 2, title: 'Fly to Lukla, trek to Phakding', description: '35min flight, 3-4hrs trek' },
+            { day: 3, title: 'Trek to Namche Bazaar', description: '6hrs trek with first view of Everest' },
+            { day: 4, title: 'Acclimatization in Namche', description: 'Hike to Everest View Hotel' },
+            { day: 5, title: 'Trek to Tengboche', description: '5hrs trek, visit monastery' },
+            { day: 6, title: 'Trek to Dingboche', description: '6hrs scenic walk' },
+            { day: 7, title: 'Acclimatization in Dingboche', description: 'Hike to Nagarjun Hill' },
+            { day: 8, title: 'Trek to Lobuche', description: '5hrs gradual ascent' },
+            { day: 9, title: 'Trek to Everest Base Camp via Gorak Shep', description: '8hrs round trip' },
+            { day: 10, title: 'Hike Kala Patthar, descend to Pheriche', description: 'Sunrise view' },
+            { day: 11, title: 'Trek to Namche', description: '7hrs descent' },
+            { day: 12, title: 'Trek to Lukla', description: '6hrs downhill' },
+            { day: 13, title: 'Fly back to Kathmandu', description: '35min flight' },
+            { day: 14, title: 'Departure', description: 'Farewell from Nepal' },
+        ],
+        includes: [
+            'All airport transfers',
+            'Domestic flights (Kathmandu-Lukla-Kathmandu)',
+            'Teahouse accommodation',
+            'Three meals daily',
+            'Experienced guide and porters',
+        ],
+        excludes: ['Nepal visa fee', 'Travel insurance', 'Personal expenses', 'Tips for staff'],
+    },
+    {
+        id: 2,
+        title: 'Annapurna Circuit Trek',
+        slug: 'annapurna-circuit-trek',
+        duration: '18 Days',
+        difficulty: 'Strenuous',
+        maxAltitude: '5,416m (Thorong La Pass)',
+        bestSeason: ['March-May', 'September-November'],
+        priceRange: '$1,000 - $1,500',
+        image: 'https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5',
+        overview: "One of the world's classic treks circling the Annapurna massif, featuring diverse landscapes from subtropical to alpine zones.",
+        highlights: [
+            'Cross Thorong La pass (highest point)',
+            'Explore Manang village',
+            'Natural hot springs at Tatopani',
+            'Views of Annapurna, Dhaulagiri, and Machhapuchhre',
+            'Visit Muktinath Temple',
+        ],
+        itinerary: [
+            { day: 1, title: 'Arrival in Kathmandu', description: 'Trip preparation and briefing' },
+            { day: 2, title: 'Drive to Besisahar', description: '6-7hrs scenic drive' },
+            { day: 3, title: 'Trek to Dharapani', description: '5-6hrs trek through forests' },
+            { day: 4, title: 'Trek to Chame', description: '5hrs walk along Marsyangdi River' },
+            { day: 5, title: 'Trek to Pisang', description: '5-6hrs scenic route' },
+            { day: 6, title: 'Trek to Manang', description: '6hrs trek with acclimatization stop' },
+            { day: 7, title: 'Acclimatization day in Manang', description: 'Hike to Ice Lake or Gangapurna Lake' },
+            { day: 8, title: 'Trek to Yak Kharka', description: '4-5hrs gradual climb' },
+            { day: 9, title: 'Trek to Thorong Phedi', description: '4hrs walk' },
+            { day: 10, title: 'Cross Thorong La, trek to Muktinath', description: 'Long day, 8-9hrs' },
+            { day: 11, title: 'Trek to Jomsom via Kagbeni', description: '5hrs downhill' },
+            { day: 12, title: 'Drive to Tatopani', description: 'Hot springs relaxation' },
+            { day: 13, title: 'Trek to Ghorepani', description: 'Uphill trek through forest' },
+            { day: 14, title: 'Poon Hill sunrise, trek to Nayapul', description: 'Drive to Pokhara' },
+            { day: 15, title: 'Rest day in Pokhara', description: 'Optional boating or sightseeing' },
+            { day: 16, title: 'Drive back to Kathmandu', description: '6-7hrs drive' },
+            { day: 17, title: 'Free day in Kathmandu', description: 'Shopping or sightseeing' },
+            { day: 18, title: 'Final departure', description: 'Farewell and airport drop' },
+        ],
+        includes: ['All ground transportation', 'Teahouse accommodation', 'Meals during trek', 'ACAP Permit and TIMS card', 'English-speaking guide'],
+        excludes: ['Travel insurance', 'Beverages and snacks', 'Hot showers and battery charging', 'Tips and donations'],
+    },
+    {
+        id: 3,
+        title: 'Langtang Valley Trek',
+        slug: 'langtang-valley-trek',
+        duration: '10 Days',
+        difficulty: 'Moderate',
+        maxAltitude: '4,984m (Tserko Ri)',
+        bestSeason: ['March-May', 'September-November'],
+        priceRange: '$700 - $1,000',
+        image: 'https://images.unsplash.com/photo-1506318137071-a8e063b4bec0',
+        overview: 'A beautiful trek close to Kathmandu through Tamang villages with stunning views of Langtang Lirung and the surrounding peaks.',
+        highlights: [
+            'Visit Kyanjin Gompa',
+            'Cheese factory at Kyanjin',
+            'Langtang National Park wildlife',
+            'Less crowded than other treks',
+            'Rich Tamang culture',
+        ],
+        itinerary: [
+            { day: 1, title: 'Drive to Syabrubesi', description: '7-8hrs drive from Kathmandu' },
+            { day: 2, title: 'Trek to Lama Hotel', description: '6hrs trek through forested trail' },
+            { day: 3, title: 'Trek to Langtang Village', description: '5-6hrs gradual ascent' },
+            { day: 4, title: 'Trek to Kyanjin Gompa', description: '4-5hrs easy walk' },
+            { day: 5, title: 'Climb Tserko Ri and back', description: 'Great panoramic views' },
+            { day: 6, title: 'Explore and rest day', description: 'Visit cheese factory' },
+            { day: 7, title: 'Trek to Lama Hotel', description: '6hrs return walk' },
+            { day: 8, title: 'Trek to Syabrubesi', description: 'Easy downhill' },
+            { day: 9, title: 'Drive back to Kathmandu', description: 'Rest in hotel' },
+            { day: 10, title: 'Departure', description: 'Transfer to airport' },
+        ],
+        includes: [
+            'All transport to/from trek start',
+            'Langtang National Park permit',
+            'Accommodation in lodges',
+            'Guide and porter services',
+            'Three meals per day during trek',
+        ],
+        excludes: ['Personal equipment', 'Hot showers and Wi-Fi', 'Drinks and snacks', 'Tips'],
+    },
+    {
+        id: 4,
+        title: 'Manaslu Circuit Trek',
+        slug: 'manaslu-circuit-trek',
+        duration: '16 Days',
+        difficulty: 'Strenuous',
+        maxAltitude: '5,106m (Larkya La Pass)',
+        bestSeason: ['March-May', 'September-November'],
+        priceRange: '$1,300 - $1,800',
+        image: 'https://images.unsplash.com/photo-1501684691657-cf3012635478',
+        overview: 'A restricted area trek around the eighth highest mountain in the world, offering pristine landscapes and authentic culture.',
+        highlights: [
+            'Larkya La Pass crossing',
+            'Tibetan-influenced culture',
+            'Less crowded alternative to Annapurna',
+            'Diverse flora and fauna',
+            'Beautiful Budhi Gandaki valley',
+        ],
+        itinerary: [
+            { day: 1, title: 'Arrival in Kathmandu', description: 'Trip briefing and preparation' },
+            { day: 2, title: 'Drive to Soti Khola', description: 'Drive through hills, start trek' },
+            { day: 3, title: 'Trek to Machha Khola', description: '6hrs trek along river' },
+            { day: 4, title: 'Trek to Jagat', description: '6hrs walk through forests' },
+            { day: 5, title: 'Trek to Deng', description: '5-6hrs trek, pass waterfalls' },
+            { day: 6, title: 'Trek to Namrung', description: '5hrs uphill walk' },
+            { day: 7, title: 'Trek to Samagaon', description: '4-5hrs trek with views' },
+            { day: 8, title: 'Acclimatization in Samagaon', description: 'Explore local monasteries' },
+            { day: 9, title: 'Trek to Larkya Phedi', description: '5hrs trekking' },
+            { day: 10, title: 'Cross Larkya La Pass, trek to Bimtang', description: 'Challenging 10hrs day' },
+            { day: 11, title: 'Trek to Tilje', description: '6-7hrs descent' },
+            { day: 12, title: 'Trek to Tal', description: '5hrs walk' },
+            { day: 13, title: 'Trek to Syange', description: '6hrs trail' },
+            { day: 14, title: 'Drive back to Kathmandu', description: 'Rest and relaxation' },
+            { day: 15, title: 'Free day in Kathmandu', description: 'Sightseeing or shopping' },
+            { day: 16, title: 'Departure', description: 'Farewell and transfer to airport' },
+        ],
+        includes: [
+            'All airport and ground transfers',
+            'Accommodation in tea houses',
+            'Meals during trek',
+            'Permit fees for Manaslu',
+            'Professional guide and porter',
+        ],
+        excludes: ['Nepal visa fees', 'Travel insurance', 'Personal expenses', 'Tips'],
+    },
+    {
+        id: 5,
+        title: 'Upper Mustang Trek',
+        slug: 'upper-mustang-trek',
+        duration: '14 Days',
+        difficulty: 'Moderate',
+        maxAltitude: '3,840m (Lo Manthang)',
+        bestSeason: ['May-October'],
+        priceRange: '$1,500 - $2,000',
+        image: 'https://images.unsplash.com/photo-1518632618335-d9b7ac4fcc72',
+        overview: 'A journey to the forbidden kingdom with Tibetan culture, ancient monasteries, and desert-like landscapes.',
+        highlights: [
+            'Explore walled city of Lo Manthang',
+            'Visit ancient Buddhist monasteries',
+            'Unique trans-Himalayan landscape',
+            'Tiji Festival (May)',
+            'Caves and cliff dwellings',
+        ],
+        itinerary: [
+            { day: 1, title: 'Arrival in Kathmandu', description: 'Preparation and briefing' },
+            { day: 2, title: 'Fly to Pokhara', description: 'Short domestic flight' },
+            { day: 3, title: 'Fly to Jomsom, trek to Kagbeni', description: 'Start of trek' },
+            { day: 4, title: 'Trek to Chele', description: '4-5hrs trek through desert landscape' },
+            { day: 5, title: 'Trek to Charang', description: '5-6hrs walk to ancient village' },
+            { day: 6, title: 'Trek to Lo Manthang', description: '6hrs trek, explore walled city' },
+            { day: 7, title: 'Lo Manthang local exploration', description: 'Visit monasteries and markets' },
+            { day: 8, title: 'Trek to Ghami', description: '6hrs walk through valley' },
+            { day: 9, title: 'Trek to Samar', description: '5hrs trek with unique views' },
+            { day: 10, title: 'Trek to Tsarang', description: '4hrs walk' },
+            { day: 11, title: 'Trek to Jomsom', description: '7hrs descent' },
+            { day: 12, title: 'Fly to Pokhara', description: 'Relax and sightseeing' },
+            { day: 13, title: 'Fly back to Kathmandu', description: 'Rest day' },
+            { day: 14, title: 'Departure', description: 'Transfer to airport' },
+        ],
+        includes: [
+            'Domestic flights (Kathmandu-Pokhara-Jomsom-Kathmandu)',
+            'Accommodation in lodges',
+            'All meals during trek',
+            'Upper Mustang Restricted Area Permit',
+            'Guide and porter services',
+        ],
+        excludes: ['Travel insurance', 'Personal expenses', 'Tips', 'Nepal visa fee'],
+    },
+    {
+        id: 6,
+        title: 'Ghorepani Poon Hill Trek',
+        slug: 'ghorepani-poon-hill-trek',
+        duration: '7 Days',
+        difficulty: 'Easy',
+        maxAltitude: '3,210m (Poon Hill)',
+        bestSeason: ['Year-round'],
+        priceRange: '$400 - $700',
+        image: 'https://images.unsplash.com/photo-1501854140801-50d01698950b',
+        overview: 'Short and sweet trek to the famous viewpoint offering panoramic views of the Annapurna and Dhaulagiri ranges.',
+        highlights: [
+            'Sunrise from Poon Hill',
+            'Rhododendron forests (spring)',
+            'Gurung and Magar culture',
+            'Great for beginners',
+            'Teahouse comforts',
+        ],
+        itinerary: [
+            { day: 1, title: 'Arrival in Pokhara', description: 'Relax by Phewa Lake' },
+            { day: 2, title: 'Drive to Nayapul, trek to Tikhedhunga', description: '3-4hrs trek' },
+            { day: 3, title: 'Trek to Ghorepani', description: '5-6hrs uphill walk' },
+            { day: 4, title: 'Early morning hike to Poon Hill, trek to Tadapani', description: 'Sunrise and views' },
+            { day: 5, title: 'Trek to Ghandruk', description: '4-5hrs downhill' },
+            { day: 6, title: 'Drive back to Pokhara', description: 'Leisure and sightseeing' },
+            { day: 7, title: 'Departure', description: 'Transfer to airport' },
+        ],
+        includes: ['Transportation to/from trek start', 'Meals during trek', 'Guide and porter', 'ACAP permit', 'Teahouse accommodation'],
+        excludes: ['Personal expenses', 'Drinks and snacks', 'Hot showers', 'Tips'],
+    },
+    {
+        id: 7,
+        title: 'Kanchenjunga Base Camp Trek',
+        slug: 'kanchenjunga-base-camp-trek',
+        duration: '24 Days',
+        difficulty: 'Strenuous',
+        maxAltitude: '5,143m (Pangpema)',
+        bestSeason: ['March-May', 'September-November'],
+        priceRange: '$2,000 - $2,800',
+        image: 'https://images.unsplash.com/photo-1513415277900-a62401e19be4',
+        overview: "Remote trek to the base of the world's third highest mountain through pristine forests and traditional villages.",
+        highlights: [
+            'Views of Kanchenjunga (8,586m)',
+            'Explore remote eastern Nepal',
+            'Diverse wildlife including red panda',
+            'Authentic Limbu and Rai culture',
+            'Glacial lakes and high passes',
+        ],
+        itinerary: [
+            { day: 1, title: 'Arrival in Kathmandu', description: 'Preparation and briefing' },
+            { day: 2, title: 'Fly to Bhadrapur, drive to Taplejung', description: 'Start of trek' },
+            { day: 3, title: 'Trek to Mitlung', description: '6hrs trek through forest' },
+            { day: 4, title: 'Trek to Amjilosa', description: '6-7hrs walk' },
+            { day: 5, title: 'Trek to Sekathum', description: '5-6hrs trek' },
+            { day: 6, title: 'Trek to Khepu', description: '6hrs walk' },
+            { day: 7, title: 'Trek to Ghunsa', description: '6hrs walk to Sherpa village' },
+            { day: 8, title: 'Rest day in Ghunsa', description: 'Acclimatization and exploration' },
+            { day: 9, title: 'Trek to Lhonak', description: '6-7hrs trek' },
+            { day: 10, title: 'Trek to Pangpema (Base Camp)', description: '6hrs trek to base camp with views' },
+            { day: 11, title: 'Explore around base camp', description: 'Rest and acclimatize' },
+            { day: 12, title: 'Trek back to Lhonak', description: 'Return trek' },
+            { day: 13, title: 'Trek to Ghunsa', description: '6hrs walk' },
+            { day: 14, title: 'Trek to Khepu', description: '6hrs walk' },
+            { day: 15, title: 'Trek to Sekathum', description: '6hrs walk' },
+            { day: 16, title: 'Trek to Amjilosa', description: '5hrs walk' },
+            { day: 17, title: 'Trek to Mitlung', description: '5hrs walk' },
+            { day: 18, title: 'Drive to Bhadrapur, fly to Kathmandu', description: 'Travel back' },
+            { day: 19, title: 'Rest day in Kathmandu', description: 'Optional sightseeing' },
+            { day: 20, title: 'Departure', description: 'Transfer to airport' },
+        ],
+        includes: [
+            'All airport and domestic flights',
+            'Lodge accommodation',
+            'Three meals daily during trek',
+            'Kanchenjunga Conservation Area Permit',
+            'Experienced guide and porters',
+        ],
+        excludes: ['Nepal visa fee', 'Travel insurance', 'Personal expenses', 'Tips'],
+    },
+    {
+        id: 8,
+        title: 'Rara Lake Trek',
+        slug: 'rara-lake-trek',
+        duration: '12 Days',
+        difficulty: 'Moderate',
+        maxAltitude: '3,710m (Rara Lake)',
+        bestSeason: ['March-May', 'September-November'],
+        priceRange: '$900 - $1,300',
+        image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef',
+        overview: "Journey to Nepal's largest lake located in the remote far-western region, surrounded by pine forests and snow-capped peaks.",
+        highlights: [
+            'Boat ride on Rara Lake',
+            'Rara National Park wildlife',
+            'Authentic Thakuri culture',
+            'Less crowded trails',
+            'Beautiful alpine scenery',
+        ],
+        itinerary: [
+            { day: 1, title: 'Arrival in Nepalgunj', description: 'Flight from Kathmandu, overnight stay' },
+            { day: 2, title: 'Fly to Jumla, drive to Talcha', description: 'Start trek' },
+            { day: 3, title: 'Trek to Mugu', description: '6hrs trek through forests' },
+            { day: 4, title: 'Trek to Rara Lake', description: '5-6hrs walk' },
+            { day: 5, title: 'Explore Rara Lake', description: 'Boat ride and sightseeing' },
+            { day: 6, title: 'Trek to Murma', description: '6hrs trek' },
+            { day: 7, title: 'Trek to Gamgadhi', description: '6hrs walk' },
+            { day: 8, title: 'Drive to Jumla', description: 'Travel day' },
+            { day: 9, title: 'Fly to Nepalgunj', description: 'Rest and prepare' },
+            { day: 10, title: 'Fly back to Kathmandu', description: 'Relax' },
+            { day: 11, title: 'Free day in Kathmandu', description: 'Sightseeing or shopping' },
+            { day: 12, title: 'Departure', description: 'Transfer to airport' },
+        ],
+        includes: [
+            'All domestic flights',
+            'Accommodation in lodges and guesthouses',
+            'All meals during trek',
+            'Rara National Park permit',
+            'Guide and porter services',
+        ],
+        excludes: ['Nepal visa fee', 'Travel insurance', 'Personal expenses', 'Tips'],
+    },
+    {
+        id: 9,
+        title: 'Helambu Trek',
+        slug: 'helambu-trek',
+        duration: '7 Days',
+        difficulty: 'Easy',
+        maxAltitude: '3,650m (Tharepati)',
+        bestSeason: ['Year-round'],
+        priceRange: '$400 - $600',
+        image: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d',
+        overview: 'Short cultural trek near Kathmandu through Hyolmo (Sherpa) villages with beautiful mountain views.',
+        highlights: ['Easy access from Kathmandu', 'Hyolmo Buddhist culture', 'Less crowded trails', 'Great for families', 'Year-round trekking'],
+        itinerary: [
+            { day: 1, title: 'Drive to Sundarijal, trek to Chisapani', description: '4-5hrs trek' },
+            { day: 2, title: 'Trek to Kutumsang', description: '4-5hrs walk' },
+            { day: 3, title: 'Trek to Tharepati', description: '5hrs uphill trek' },
+            { day: 4, title: 'Trek to Malemchi', description: '5hrs downhill trek' },
+            { day: 5, title: 'Trek to Sermathang', description: '5hrs walk through villages' },
+            { day: 6, title: 'Trek to Melamchi Pul Bazaar, drive back to Kathmandu', description: 'Travel day' },
+            { day: 7, title: 'Departure', description: 'Transfer to airport' },
+        ],
+        includes: ['All transport during trek', 'Accommodation in lodges', 'Meals during trek', 'Guide and porter', 'Langtang National Park permit'],
+        excludes: ['Personal expenses', 'Tips', 'Travel insurance', 'Nepal visa fee'],
+    },
+    {
+        id: 10,
+        title: 'Makalu Base Camp Trek',
+        slug: 'makalu-base-camp-trek',
+        duration: '20 Days',
+        difficulty: 'Strenuous',
+        maxAltitude: '5,000m (Makalu BC)',
+        bestSeason: ['March-May', 'September-November'],
+        priceRange: '$1,800 - $2,500',
+        image: 'https://images.unsplash.com/photo-1581595219315-a187dd40c322',
+        overview: "Challenging trek to the base of the world's fifth highest mountain through remote eastern Nepal.",
+        highlights: [
+            'Views of Makalu (8,485m)',
+            'Barun Valley biodiversity',
+            'Shipton La Pass (4,216m)',
+            'Rare wildlife sightings',
+            'Authentic Rai culture',
+        ],
+        itinerary: [
+            { day: 1, title: 'Arrival in Kathmandu', description: 'Trip briefing' },
+            { day: 2, title: 'Fly to Tumlingtar, trek to Seduwa', description: 'Start trek' },
+            { day: 3, title: 'Trek to Yangle Kharka', description: '6-7hrs trek' },
+            { day: 4, title: 'Trek to Num', description: '6hrs walk' },
+            { day: 5, title: 'Trek to Seduwa', description: '6hrs walk' },
+            { day: 6, title: 'Trek to Tashigaon', description: '6hrs walk' },
+            { day: 7, title: 'Trek to Shipton La Base', description: '5-6hrs walk' },
+            { day: 8, title: 'Cross Shipton La Pass, trek to Makalu Base Camp', description: 'Challenging day' },
+            { day: 9, title: 'Explore Makalu Base Camp', description: 'Rest and acclimatize' },
+            { day: 10, title: 'Return trek begins', description: 'Back to Seduwa' },
+            { day: 11, title: 'Trek to Tumlingtar', description: 'Travel back' },
+            { day: 12, title: 'Fly to Kathmandu', description: 'Rest day' },
+            { day: 13, title: 'Free day in Kathmandu', description: 'Sightseeing' },
+            { day: 14, title: 'Departure', description: 'Transfer to airport' },
+        ],
+        includes: [
+            'Domestic flights (Kathmandu-Tumlingtar-Kathmandu)',
+            'Accommodation in lodges',
+            'Three meals daily',
+            'Makalu Barun National Park permit',
+            'Guide and porter services',
+        ],
+        excludes: ['Nepal visa fee', 'Travel insurance', 'Personal expenses', 'Tips'],
+    },
+    {
+        id: 11,
+        title: 'Dolpo Trek',
+        slug: 'dolpo-trek',
+        duration: '18 Days',
+        difficulty: 'Strenuous',
+        maxAltitude: '5,151m (Kang La Pass)',
+        bestSeason: ['May-September'],
+        priceRange: '$2,000 - $3,000',
+        image: 'https://images.unsplash.com/photo-1551085254-e96b210db58a',
+        overview: 'Remote trek through the hidden valleys of Dolpo, featured in the movie "Himalaya", with Tibetan Buddhist culture.',
+        highlights: ['Shey Phoksundo Lake', 'Ancient Bon Po monasteries', 'Nomadic yak herders', 'Wilderness experience', 'Crystal Mountain'],
+        itinerary: [
+            { day: 1, title: 'Arrival in Kathmandu', description: 'Trip briefing' },
+            { day: 2, title: 'Fly to Nepalgunj, onward to Juphal', description: 'Start trek' },
+            { day: 3, title: 'Trek to Dunai', description: '6hrs trek' },
+            { day: 4, title: 'Trek to Saldang', description: '6hrs walk' },
+            { day: 5, title: 'Trek to Ringmo', description: '5-6hrs trek' },
+            { day: 6, title: 'Explore Shey Phoksundo Lake', description: 'Rest day' },
+            { day: 7, title: 'Trek to Namgung', description: '5hrs walk' },
+            { day: 8, title: 'Trek to Chhepka', description: '6hrs walk' },
+            { day: 9, title: 'Trek to Dho Tarap', description: '5-6hrs trek' },
+            { day: 10, title: 'Trek to Lho', description: '6hrs walk' },
+            { day: 11, title: 'Trek to Mukot', description: '5hrs walk' },
+            { day: 12, title: 'Trek to Juphal', description: '6hrs walk' },
+            { day: 13, title: 'Fly to Nepalgunj', description: 'Travel day' },
+            { day: 14, title: 'Fly back to Kathmandu', description: 'Rest day' },
+            { day: 15, title: 'Free day in Kathmandu', description: 'Sightseeing or shopping' },
+            { day: 16, title: 'Departure', description: 'Transfer to airport' },
+        ],
+        includes: [
+            'All domestic flights',
+            'Accommodation in lodges/tea houses',
+            'Meals during trek',
+            'Dolpo Restricted Area Permit',
+            'Guide and porter services',
+        ],
+        excludes: ['Nepal visa fee', 'Travel insurance', 'Personal expenses', 'Tips'],
+    },
+    {
+        id: 12,
+        title: 'Everest Base Camp Helicopter Tour',
+        slug: 'everest-base-camp-helicopter-tour',
+        duration: '1 Day',
+        difficulty: 'Easy',
+        maxAltitude: '5,364m (Everest Base Camp)',
+        bestSeason: ['Year-round'],
+        priceRange: '$3,000 - $4,000',
+        image: 'https://images.unsplash.com/photo-1529277451303-4a0c39b8193b',
+        overview: 'Experience Everest Base Camp and Kala Patthar views on a scenic helicopter tour without trekking.',
+        highlights: [
+            'Fly over Everest region',
+            'Panoramic views of Himalayas',
+            'Visit Everest Base Camp by helicopter',
+            'Short duration experience',
+            'Comfortable and safe',
+        ],
+        itinerary: [
+            { day: 1, title: 'Early morning helicopter flight from Kathmandu', description: 'Fly to Everest Base Camp' },
+            { day: 1, title: 'Sightseeing at Base Camp and Kala Patthar', description: '30-45 mins stop' },
+            { day: 1, title: 'Return flight to Kathmandu', description: 'Arrival before noon' },
+        ],
+        includes: ['Helicopter flights', 'Airport transfers', 'Permits and fees', 'Experienced pilot', 'Refreshments'],
+        excludes: ['Nepal visa fee', 'Travel insurance', 'Personal expenses', 'Tips'],
+    },
+];
+
+export default function ServicesPage() {
+    return (
+        <>
+            <Head title="Trekking Services in Nepal | Himalayan Adventures" />
+            <div className="bg-gray-50">
+                {/* Hero Section */}
+                <section className="relative bg-gradient-to-r from-blue-900 to-purple-900 py-24 text-white">
+                    <div className="container mx-auto px-4 text-center">
+                        <h1 className="mb-6 text-4xl font-bold md:text-5xl lg:text-6xl">Trekking Services in Nepal</h1>
+                        <p className="mx-auto max-w-2xl text-xl text-blue-100">
+                            Discover our carefully curated selection of Nepal's most spectacular trekking adventures
+                        </p>
+                    </div>
+                </section>
+
+                {/* Services Grid */}
+                <section className="py-16">
+                    <div className="container mx-auto px-4">
+                        <div className="mb-12 text-center">
+                            <h2 className="text-3xl font-bold text-gray-900 md:text-4xl">Choose Your Adventure</h2>
+                            <p className="mx-auto mt-4 max-w-2xl text-gray-600">From easy cultural walks to challenging high-altitude expeditions</p>
+                        </div>
+
+                        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                            {services.map((service) => (
+                                <div
+                                    key={service.id}
+                                    className="overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 hover:shadow-xl"
+                                >
+                                    <div className="relative h-48 overflow-hidden">
+                                        <img
+                                            src={service.image}
+                                            alt={service.title}
+                                            className="h-full w-full object-cover transition-transform duration-500 hover:scale-110"
+                                        />
+                                        <div className="absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black/70 to-transparent p-4 text-white">
+                                            <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-medium capitalize backdrop-blur-sm">
+                                                {service.difficulty}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="p-6">
+                                        <h3 className="mb-2 text-xl font-bold text-gray-900">{service.title}</h3>
+                                        <div className="mb-4 flex flex-wrap gap-3 text-sm">
+                                            <span className="flex items-center text-gray-600">
+                                                <svg className="mr-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth="2"
+                                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                                                    ></path>
+                                                </svg>
+                                                {service.duration}
+                                            </span>
+                                            <span className="flex items-center text-gray-600">
+                                                <svg className="mr-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth="2"
+                                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                                    ></path>
+                                                </svg>
+                                                {service.maxAltitude}
+                                            </span>
+                                        </div>
+                                        <p className="mb-4 text-gray-600">{service.overview}</p>
+                                        <div className="flex items-center justify-between">
+                                            <span className="font-medium text-blue-600">{service.priceRange}</span>
+                                            <a
+                                                href={`/services/${service.slug}`}
+                                                className="rounded-full bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-blue-700"
+                                            >
+                                                View Details
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* Why Choose Us Section */}
+                <section className="bg-gray-100 py-16">
+                    <div className="container mx-auto px-4">
+                        <div className="mb-12 text-center">
+                            <h2 className="text-3xl font-bold text-gray-900 md:text-4xl">Why Choose Our Trekking Services</h2>
+                        </div>
+                        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+                            {[
+                                {
+                                    title: 'Local Expertise',
+                                    description: 'Our guides have 10+ years experience leading treks in Nepal',
+                                    icon: '🌄',
+                                },
+                                {
+                                    title: 'Safety First',
+                                    description: 'Full medical kits, oxygen, and emergency evacuation plans',
+                                    icon: '🛡️',
+                                },
+                                {
+                                    title: 'Sustainable Tourism',
+                                    description: 'We follow Leave No Trace principles and support local communities',
+                                    icon: '🌱',
+                                },
+                                {
+                                    title: 'Customizable Itineraries',
+                                    description: 'Tailor your trek to match your fitness and interests',
+                                    icon: '✏️',
+                                },
+                                {
+                                    title: 'Best Price Guarantee',
+                                    description: 'Quality service at competitive prices with no hidden costs',
+                                    icon: '💰',
+                                },
+                                {
+                                    title: '24/7 Support',
+                                    description: 'Dedicated team available before, during, and after your trek',
+                                    icon: '📞',
+                                },
+                            ].map((feature, index) => (
+                                <div key={index} className="rounded-xl bg-white p-6 shadow-sm">
+                                    <div className="mb-4 text-3xl">{feature.icon}</div>
+                                    <h3 className="mb-2 text-xl font-bold text-gray-900">{feature.title}</h3>
+                                    <p className="text-gray-600">{feature.description}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* Booking CTA */}
+                <section className="bg-gradient-to-r from-blue-600 to-purple-600 py-16 text-white">
+                    <div className="container mx-auto px-4 text-center">
+                        <h2 className="mb-6 text-3xl font-bold md:text-4xl">Ready for Your Himalayan Adventure?</h2>
+                        <p className="mx-auto mb-8 max-w-2xl text-xl text-blue-100">
+                            Book your trek today and experience the magic of Nepal's mountains
+                        </p>
+                        <div className="flex flex-col justify-center gap-4 sm:flex-row">
+                            <a
+                                href="/contact"
+                                className="rounded-full bg-white px-8 py-4 font-medium text-blue-600 shadow-lg transition-all hover:bg-gray-100 hover:shadow-xl"
+                            >
+                                Book Now
+                            </a>
+                            <a
+                                href="/faq"
+                                className="rounded-full bg-white/20 px-8 py-4 font-medium text-white backdrop-blur-sm transition-all hover:bg-white/30"
+                            >
+                                Ask Questions
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </>
+    );
+}
+
+ServicesPage.layout = (page: ReactNode): ReactElement => <Layout>{page}</Layout>;

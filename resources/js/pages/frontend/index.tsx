@@ -353,7 +353,13 @@ export default function Home() {
     const featuredPackages = trekPackages.filter((pkg) => pkg.featured);
     const otherPackages = trekPackages.filter((pkg) => !pkg.featured);
 
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData, post, processing, errors, reset } = useForm<{
+        name: string;
+        email: string;
+        phone: string;
+        subject: string;
+        message: string;
+    }>({
         name: '',
         email: '',
         phone: '',
@@ -658,12 +664,12 @@ export default function Home() {
                                                 <span className="block text-xs text-gray-500">per person</span>
                                             </div>
                                             <div className="flex gap-2">
-                                                <a
-                                                    href={`/treks/${trek.id}`}
+                                                <Link
+                                                    href={route('treks.show', trek.id)}
                                                     className="rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-green-700"
                                                 >
                                                     Details
-                                                </a>
+                                                </Link>
                                                 <a
                                                     href="#contact"
                                                     className="rounded-lg border border-green-600 px-4 py-2 text-sm font-medium text-green-600 transition-colors hover:bg-green-50"
@@ -719,7 +725,7 @@ export default function Home() {
                                             <div className="flex items-center justify-between">
                                                 <span className="text-sm font-bold text-green-600">From ${trek.price}</span>
                                                 <Link
-                                                    href={route('treks.show', { id: trek.id })}
+                                                    href={route('treks.show', trek.id)}
                                                     className="text-xs font-medium text-gray-500 hover:text-green-600"
                                                 >
                                                     View →
@@ -991,15 +997,15 @@ export default function Home() {
                         </div>
 
                         <div className="mt-8 text-center">
-                            <a
-                                href="/gallery"
+                            <Link
+                                href={route('gallery.show', 6)}
                                 className="inline-flex items-center rounded-lg border border-green-600 px-6 py-3 font-bold text-green-600 transition-all hover:bg-green-600 hover:text-white"
                             >
                                 View Full Gallery
                                 <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                                 </svg>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </section>
@@ -1039,9 +1045,9 @@ export default function Home() {
                                         <p className="mb-4 text-gray-600">{post.excerpt}</p>
                                         <div className="flex items-center justify-between">
                                             <span className="text-sm text-gray-500">By {post.author}</span>
-                                            <a href={`/blog/${post.id}`} className="text-sm font-medium text-green-600 hover:underline">
+                                            <Link href={route('blog.show', post.id)} className="text-sm font-medium text-green-600 hover:underline">
                                                 Read More →
-                                            </a>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
@@ -1121,7 +1127,7 @@ export default function Home() {
 
                             <div className="w-full rounded-lg bg-white/10 p-6 shadow-xl backdrop-blur-sm transition-all hover:shadow-2xl md:w-2/5">
                                 {flash.success && <div className="flex justify-center leading-8 text-white">{flash.success}</div>}
-                                <hr className="bg-green-500" />
+                                {flash.success || (flash.error && <hr className="bg-green-500" />)}
                                 <h3 className="mb-6 text-center text-2xl font-bold text-white">Send Us a Message</h3>
                                 <form className="space-y-5" onSubmit={handleSubmit}>
                                     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -1135,7 +1141,9 @@ export default function Home() {
                                                 name="name"
                                                 value={data.name}
                                                 onChange={(e) => setData('name', e.target.value)}
-                                                className={`focus:ring-opacity-50 ${errors?.name ?? 'border-red-500 bg-red-400'} w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/50 focus:border-green-300 focus:ring-2 focus:ring-green-200`}
+                                                className={`focus:ring-opacity-50 ${
+                                                    errors.name ? 'border-red-500 bg-red-200' : 'border-white/20 bg-white/10'
+                                                } w-full rounded-lg px-4 py-3 text-white placeholder-white/50 focus:border-green-300 focus:ring-2 focus:ring-green-200`}
                                                 placeholder="Your name"
                                             />
                                             {errors.name && <InputError message={errors.name} />}
@@ -1150,7 +1158,9 @@ export default function Home() {
                                                 name="email"
                                                 value={data.email}
                                                 onChange={(e) => setData('email', e.target.value)}
-                                                className="focus:ring-opacity-50 ${errors.email ?? 'border-red-500 bg-red-400'} w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/50 focus:border-green-300 focus:ring-2 focus:ring-green-200"
+                                                className={`focus:ring-opacity-50 ${
+                                                    errors.email ? 'border-red-500 bg-red-200' : 'border-white/20 bg-white/10'
+                                                } w-full rounded-lg px-4 py-3 text-white placeholder-white/50 focus:border-green-300 focus:ring-2 focus:ring-green-200`}
                                                 placeholder="Your email"
                                             />
                                             {errors.email && <InputError message={errors.email} />}
@@ -1166,7 +1176,9 @@ export default function Home() {
                                             id="subject"
                                             value={data.phone}
                                             onChange={(e) => setData('phone', e.target.value)}
-                                            className="focus:ring-opacity-50 ${errors.phone ?? 'border-red-500 bg-red-400'} w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/50 focus:border-green-300 focus:ring-2 focus:ring-green-200"
+                                            className={`focus:ring-opacity-50 ${
+                                                errors.phone ? 'border-red-500 bg-red-200' : 'border-white/20 bg-white/10'
+                                            } w-full rounded-lg px-4 py-3 text-white placeholder-white/50 focus:border-green-300 focus:ring-2 focus:ring-green-200`}
                                             placeholder="Phone"
                                         />
                                         {errors.phone && <InputError message={errors.phone} />}
@@ -1181,7 +1193,9 @@ export default function Home() {
                                             name="subject"
                                             value={data.subject}
                                             onChange={(e) => setData('subject', e.target.value)}
-                                            className="focus:ring-opacity-50 ${errors.subject ?? 'border-red-500 bg-red-400'} w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/50 focus:border-green-300 focus:ring-2 focus:ring-green-200"
+                                            className={`focus:ring-opacity-50 ${
+                                                errors.subject ? 'border-red-500 bg-red-200' : 'border-white/20 bg-white/10'
+                                            } w-full rounded-lg px-4 py-3 text-white placeholder-white/50 focus:border-green-300 focus:ring-2 focus:ring-green-200`}
                                             placeholder="Subject"
                                         />
                                         {errors.subject && <InputError message={errors.subject} />}
@@ -1196,7 +1210,9 @@ export default function Home() {
                                             name="message"
                                             value={data.message}
                                             onChange={(e) => setData('message', e.target.value)}
-                                            className="focus:ring-opacity-50 `${errors.message ? 'border-red-500 bg-red-400'}` w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/50 focus:border-green-300 focus:ring-2 focus:ring-green-200"
+                                            className={`focus:ring-opacity-50 ${
+                                                errors.message ? 'border-red-500 bg-red-200' : 'border-white/20 bg-white/10'
+                                            } w-full rounded-lg px-4 py-3 text-white placeholder-white/50 focus:border-green-300 focus:ring-2 focus:ring-green-200`}
                                             placeholder="Your message"
                                         ></textarea>
                                     </div>
