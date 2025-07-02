@@ -1,4 +1,4 @@
-import FrontendLayout from '@/layouts/layouts/frontendlayout/layout';
+import Layout from '@/layouts/layouts/frontendlayout/layout';
 import { Head } from '@inertiajs/react';
 import { ReactElement, ReactNode } from 'react';
 
@@ -18,10 +18,10 @@ interface TeamMember {
     }[];
 }
 
-export default function TeamMember({ member }: { member: TeamMember }) {
+export default function TeamMember({ member = sampleMember }: { member?: TeamMember }) {
     return (
         <>
-            <Head title={`hell - Himalayan Ecological Trek`} />
+            <Head title={`${member.name} - Himalayan Ecological Trek`} />
             <div className="bg-white">
                 {/* Hero Section */}
                 <section className="relative h-96 overflow-hidden">
@@ -169,4 +169,30 @@ export default function TeamMember({ member }: { member: TeamMember }) {
     );
 }
 
-TeamMember.frontendlayout = (page: ReactNode): ReactElement => <FrontendLayout page={page} />;
+// Sample static data for a Himalayan trekking guide
+const sampleMember: TeamMember = {
+    id: 1,
+    name: 'Ang Sherpa',
+    role: 'Senior Trekking Guide & Expedition Leader',
+    image: 'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80',
+    bio: 'Born and raised in the Khumbu region at the foot of Mount Everest, Ang has been leading treks in the Himalayas for over 15 years. With extensive knowledge of high-altitude routes, local cultures, and mountain safety, Ang has successfully guided more than 200 treks to Everest Base Camp, Annapurna Circuit, and other iconic routes. His passion for sustainable tourism and deep respect for the mountains make him one of the most sought-after guides in Nepal.',
+    experience: '15+ years guiding in Himalayas',
+    languages: ['English', 'Nepali', 'Sherpa', 'Hindi'],
+    certifications: [
+        'UIAA Mountain Leader Certification',
+        'Wilderness First Responder',
+        'Nepal Government Licensed Guide',
+        'High Altitude First Aid',
+    ],
+    specialties: ['High Altitude Trekking', 'Cultural Interpretation', 'Mountain Safety', 'Photography Guidance', 'Sustainable Tourism'],
+    treksLed: [
+        { id: 1, title: 'Everest Base Camp Trek' },
+        { id: 2, title: 'Annapurna Circuit Trek' },
+        { id: 3, title: 'Manaslu Circuit Trek' },
+        { id: 4, title: 'Langtang Valley Trek' },
+        { id: 5, title: 'Upper Mustang Trek' },
+        { id: 6, title: 'Gokyo Lakes Trek' },
+    ],
+};
+
+TeamMember.layout = (page: ReactNode): ReactElement => <Layout>{page}</Layout>;

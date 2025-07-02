@@ -16,7 +16,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
 
-    Route::name('backend.')->resource('contacts',BackendContactController::class)->except('edit','update','store','create');
+    // Route::name('backend.')->resource('contacts',BackendContactController::class)->except('edit','update','store','create');
+    
+    Route::name('backend.')->group(function () {
+        Route::resource('contacts', BackendContactController::class)->except('edit', 'update', 'store', 'create');
+    });
+
 });
 
 require __DIR__.'/settings.php';

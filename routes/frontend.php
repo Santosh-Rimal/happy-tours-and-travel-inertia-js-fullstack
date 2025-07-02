@@ -35,4 +35,9 @@ Route::get('/team/{id}', function(){
 return Inertia::render('frontend/teammember');
 })->name('team.show');
 
+
+Route::get('our-service', function(){
+return Inertia::render('frontend/service');
+})->name('service');
+
 Route::post('contact/store',[ContactController::class,'store'])->name('contacts.store');

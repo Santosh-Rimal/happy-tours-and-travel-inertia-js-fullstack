@@ -4,7 +4,6 @@ import Layout from '@/layouts/layouts/frontendlayout/layout';
 // import FrontendLayout from '@/layouts/layouts/frontendlayout/layout';
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import { FormEvent, ReactNode } from 'react';
-
 interface TrekPackage {
     id: number;
     title: string;

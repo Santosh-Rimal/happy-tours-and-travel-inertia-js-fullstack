@@ -494,12 +494,12 @@ export default function ServicesPage() {
     return (
         <>
             <Head title="Trekking Services in Nepal | Himalayan Adventures" />
-            <div className="bg-gray-50">
+            <div className="bg-green-50">
                 {/* Hero Section */}
-                <section className="relative bg-gradient-to-r from-blue-900 to-purple-900 py-24 text-white">
+                <section className="relative bg-gradient-to-r from-green-600 to-green-800 py-24 text-white">
                     <div className="container mx-auto px-4 text-center">
                         <h1 className="mb-6 text-4xl font-bold md:text-5xl lg:text-6xl">Trekking Services in Nepal</h1>
-                        <p className="mx-auto max-w-2xl text-xl text-blue-100">
+                        <p className="mx-auto max-w-2xl text-xl text-green-100">
                             Discover our carefully curated selection of Nepal's most spectacular trekking adventures
                         </p>
                     </div>
@@ -509,7 +509,7 @@ export default function ServicesPage() {
                 <section className="py-16">
                     <div className="container mx-auto px-4">
                         <div className="mb-12 text-center">
-                            <h2 className="text-3xl font-bold text-gray-900 md:text-4xl">Choose Your Adventure</h2>
+                            <h2 className="text-3xl font-bold text-gray-800 md:text-4xl">Choose Your Adventure</h2>
                             <p className="mx-auto mt-4 max-w-2xl text-gray-600">From easy cultural walks to challenging high-altitude expeditions</p>
                         </div>
 
@@ -526,7 +526,7 @@ export default function ServicesPage() {
                                             className="h-full w-full object-cover transition-transform duration-500 hover:scale-110"
                                         />
                                         <div className="absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black/70 to-transparent p-4 text-white">
-                                            <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-medium capitalize backdrop-blur-sm">
+                                            <span className="rounded-full bg-green-600/90 px-3 py-1 text-xs font-medium capitalize backdrop-blur-sm">
                                                 {service.difficulty}
                                             </span>
                                         </div>
@@ -559,10 +559,10 @@ export default function ServicesPage() {
                                         </div>
                                         <p className="mb-4 text-gray-600">{service.overview}</p>
                                         <div className="flex items-center justify-between">
-                                            <span className="font-medium text-blue-600">{service.priceRange}</span>
+                                            <span className="font-medium text-green-600">{service.priceRange}</span>
                                             <a
                                                 href={`/services/${service.slug}`}
-                                                className="rounded-full bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-blue-700"
+                                                className="rounded-full bg-green-600 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-green-700"
                                             >
                                                 View Details
                                             </a>
@@ -575,10 +575,10 @@ export default function ServicesPage() {
                 </section>
 
                 {/* Why Choose Us Section */}
-                <section className="bg-gray-100 py-16">
+                <section className="bg-green-100 py-16">
                     <div className="container mx-auto px-4">
                         <div className="mb-12 text-center">
-                            <h2 className="text-3xl font-bold text-gray-900 md:text-4xl">Why Choose Our Trekking Services</h2>
+                            <h2 className="text-3xl font-bold text-gray-800 md:text-4xl">Why Choose Our Trekking Services</h2>
                         </div>
                         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
                             {[
@@ -613,9 +613,9 @@ export default function ServicesPage() {
                                     icon: '📞',
                                 },
                             ].map((feature, index) => (
-                                <div key={index} className="rounded-xl bg-white p-6 shadow-sm">
+                                <div key={index} className="rounded-xl bg-white p-6 shadow-sm transition-all hover:shadow-md">
                                     <div className="mb-4 text-3xl">{feature.icon}</div>
-                                    <h3 className="mb-2 text-xl font-bold text-gray-900">{feature.title}</h3>
+                                    <h3 className="mb-2 text-xl font-bold text-gray-800">{feature.title}</h3>
                                     <p className="text-gray-600">{feature.description}</p>
                                 </div>
                             ))}
@@ -624,22 +624,22 @@ export default function ServicesPage() {
                 </section>
 
                 {/* Booking CTA */}
-                <section className="bg-gradient-to-r from-blue-600 to-purple-600 py-16 text-white">
+                <section className="bg-gradient-to-r from-green-700 to-green-900 py-16 text-white">
                     <div className="container mx-auto px-4 text-center">
                         <h2 className="mb-6 text-3xl font-bold md:text-4xl">Ready for Your Himalayan Adventure?</h2>
-                        <p className="mx-auto mb-8 max-w-2xl text-xl text-blue-100">
+                        <p className="mx-auto mb-8 max-w-2xl text-xl text-green-100">
                             Book your trek today and experience the magic of Nepal's mountains
                         </p>
                         <div className="flex flex-col justify-center gap-4 sm:flex-row">
                             <a
                                 href="/contact"
-                                className="rounded-full bg-white px-8 py-4 font-medium text-blue-600 shadow-lg transition-all hover:bg-gray-100 hover:shadow-xl"
+                                className="rounded-full bg-white px-8 py-4 font-medium text-green-700 shadow-lg transition-all hover:bg-gray-100 hover:shadow-xl"
                             >
                                 Book Now
                             </a>
                             <a
                                 href="/faq"
-                                className="rounded-full bg-white/20 px-8 py-4 font-medium text-white backdrop-blur-sm transition-all hover:bg-white/30"
+                                className="rounded-full bg-white/20 px-8 py-4 font-medium text-white backdrop-blur-sm transition-all hover:bg-white/30 hover:text-white"
                             >
                                 Ask Questions
                             </a>

@@ -1,7 +1,9 @@
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
-import { Head } from '@inertiajs/react';
+import { Head, useForm, usePage } from '@inertiajs/react';
 import { TrashIcon } from 'lucide-react';
+import { useState } from 'react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -19,20 +21,36 @@ interface Contact {
     subject: string;
 }
 
-export default function Contact({ contacts }: { contacts: Contact[] }) {
-    const handleDelete = (id: number) => {};
-    // const { contacts } = contacts;
-    console.log(contacts);
+interface ContactProps {
+    contacts: Contact[];
+}
+
+export default function ContactList({ contacts }: ContactProps) {
+    const { flash } = usePage<{ flash: { success?: string; error?: string } }>().props;
+    const [deletingId, setDeletingId] = useState<number | null>(null);
+    const { delete: destroy, processing } = useForm();
+    const handleDelete = (id: number) => {
+        setDeletingId(id);
+        if (confirm('Are you sure you want to delete this contact?' + `${id}`)) {
+            destroy(route('backend.contacts.destroy', { id }));
+        }
+    };
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Dashboard" />
-            {/* <h1>This is contact page</h1>
-
-            {contacts.map((contact) => (
-                <h2>{contact.name}</h2>
-                
-            ))} */}
+            <Head title="Contact Messages" />
             <div className="px-4 py-8 sm:px-6 lg:px-8">
+                {flash.success && (
+                    <div className="mb-4 w-full">
+                        <Alert variant="destructive" className="border-red-500 bg-red-50">
+                            <div className="flex items-center gap-2">
+                                <TrashIcon className="h-5 w-5 text-red-600" />
+                                <AlertTitle className="text-red-800">Deleted</AlertTitle>
+                            </div>
+                            <AlertDescription className="text-red-700">{flash.success}</AlertDescription>
+                        </Alert>
+                    </div>
+                )}
                 <h1 className="mb-6 text-2xl font-bold">Contact Messages</h1>
 
                 <div className="overflow-x-auto rounded-lg bg-white shadow">
@@ -60,10 +78,13 @@ export default function Contact({ contacts }: { contacts: Contact[] }) {
                                         <td className="max-w-xs truncate px-6 py-4 text-sm text-gray-500">{contact.message}</td>
                                         <td className="px-6 py-4 text-sm font-medium whitespace-nowrap">
                                             <button
+                                                disabled={processing}
                                                 onClick={() => handleDelete(contact.id)}
                                                 className="flex items-center gap-1 text-red-600 hover:text-red-900"
+                                                aria-label={`Delete contact ${contact.name}`}
                                             >
-                                                <TrashIcon className="h-4 w-4" /> Delete
+                                                <TrashIcon className="h-4 w-4" />
+                                                {deletingId === contact.id && processing ? 'Deleting...' : 'Delete'}
                                             </button>
                                         </td>
                                     </tr>
