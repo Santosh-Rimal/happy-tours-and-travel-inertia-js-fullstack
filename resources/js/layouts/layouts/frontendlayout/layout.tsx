@@ -26,9 +26,18 @@ export default function Layout({ children }: LayoutProps) {
                             <Link href="/" className="text-gray-700 hover:text-blue-600">
                                 Home
                             </Link>
-                            <Link href={route('service')} className="text-gray-700 hover:text-blue-600">
+                            <Link
+                                href={route('service')}
+                                className={`${route().current('service') ? 'text-green-500' : 'text-gray-700'} hover:text-blue-600`}
+                            >
                                 Our Services
                             </Link>
+                            {/* <Link
+                                href={route('service')}
+                                className={route().current('service') ? 'text-green-500' : 'text-gray-700 hover:text-blue-600'}
+                            >
+                                Our Services
+                            </Link> */}
                             <Link href="/works" className="text-gray-700 hover:text-blue-600">
                                 Our Works
                             </Link>

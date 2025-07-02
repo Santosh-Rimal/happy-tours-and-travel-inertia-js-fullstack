@@ -33,6 +33,12 @@ const mainNavItems: NavItem[] = [
         icon: ContactRound,
         isActive: true,
     },
+    // {
+    //     title: 'Contact',
+    //     href: '/contacts',
+    //     icon: ContactRound,
+    //     isActive: true,
+    // },
 ];
 
 const NavGroups: NavGroup[] = [
